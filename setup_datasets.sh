@@ -7,7 +7,7 @@ echo "=== Preparing evaluation datasets ==="
 echo "- Downloading GSM8K test set…"
 mkdir -p data/gsm8k
 if [ ! -s data/gsm8k/test.jsonl ]; then
-  wget https://github.com/openai/grade-school-math/raw/master/data/test.jsonl \
+  wget https://raw.githubusercontent.com/openai/grade-school-math/refs/heads/master/grade_school_math/data/test.jsonl \
        -O data/gsm8k/test.jsonl
 else
   echo "  → data/gsm8k/test.jsonl already exists, skipping"
