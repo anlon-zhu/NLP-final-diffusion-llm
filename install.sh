@@ -1,7 +1,7 @@
 # conda create -n smdm python=3.9
 # conda activate smdm
 
-# pip install torch torchvision torchaudio
+pip install torch torchvision torchaudio
 
 # install flash-attention
 pip uninstall ninja -y && pip install ninja -U
