@@ -8,6 +8,7 @@ Usage: $0 [-i] [-l LOG_DIR] [-p PROJECT_DIR]
   -i              Prompt interactively for LOG_DIR and PROJECT_DIR
   -l LOG_DIR      Directory for Slurm logs (stdout & stderr)
   -p PROJECT_DIR  Root of your project (where eval_mdm.sh lives)
+  -m MAIL_USER    User to send job notifications to
 EOF
   exit 1
 }
@@ -15,12 +16,14 @@ EOF
 INTERACTIVE=false
 LOG_DIR=""
 PROJECT_DIR=""
+MAIL_USER=""
 
-while getopts "il:p:" opt; do
+while getopts "il:p:m:" opt; do
   case $opt in
     i) INTERACTIVE=true ;;
     l) LOG_DIR=$OPTARG ;;
     p) PROJECT_DIR=$OPTARG ;;
+    m) MAIL_USER=$OPTARG ;;
     *) usage ;;
   esac
 done
@@ -43,6 +46,8 @@ sbatch \
   --cpus-per-task=4 \
   --mem=32G \
   --time=02:00:00 \
+  --mail-type=BEGIN,END,FAIL \
+  --mail-user=${MAIL_USER} \
   --output="${LOG_DIR}/ev_mdm_%j.out" \
   --error="${LOG_DIR}/ev_mdm_%j.err" \
   --wrap="\
