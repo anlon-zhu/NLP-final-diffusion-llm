@@ -46,7 +46,6 @@ sbatch \
   --cpus-per-task=4 \
   --mem=32G \
   --time=02:00:00 \
-  --partition=mig \
   --mail-type=BEGIN,END,FAIL \
   --mail-user=${MAIL_USER} \
   --output="${LOG_DIR}/ev_mdm_%j.out" \
