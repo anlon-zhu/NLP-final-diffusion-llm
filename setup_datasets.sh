@@ -37,8 +37,28 @@ else
 fi
 
 # 4) FineWeb temporal-shift
-echo "- Running FineWeb prep script…"
-mkdir -p data/fineweb
+echo "- Preparing FineWeb temporal-shift data…"
+# Initialize conda in-script
+eval "$(conda shell.bash hook)"
+
+# Create fineweb env if needed
+if ! conda env list | grep -qE '^\s*fineweb\s+'; then
+  echo "  → Creating 'fineweb' env with Python 3.10"
+  conda create -n fineweb python=3.10 -y
+else
+  echo "  → 'fineweb' env already exists"
+fi
+
+echo "  → Activating 'fineweb' env"
+conda activate fineweb
+
+echo "  → Installing preprocessing dependencies"
+pip install datatrove==0.2.0 transformers pyarrow
+
+echo "  → Running FineWeb prep script"
 python scripts/prepare_fineweb.py
 
-echo "✅  All evaluation datasets are ready under data/*"
+echo "  → Deactivating 'fineweb' env"
+conda deactivate
+
+echo "✅ All evaluation datasets are ready under data/*"
