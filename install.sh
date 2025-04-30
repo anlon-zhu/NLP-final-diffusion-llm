@@ -1,5 +1,5 @@
-# conda create -n smdm python=3.9
-# conda activate smdm
+# conda create -n mdm python=3.9
+# conda activate mdm
 
 pip install torch torchvision torchaudio
 
