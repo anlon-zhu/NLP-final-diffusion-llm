@@ -39,7 +39,6 @@ fi
 # submit the job
 sbatch \
   --job-name=mdm_eval \
-  --partition=gpu \
   --gres=gpu:1 \
   --cpus-per-task=4 \
   --mem=32G \
