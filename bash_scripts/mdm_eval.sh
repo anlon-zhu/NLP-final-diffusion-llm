@@ -46,13 +46,13 @@ sbatch \
   --gres=gpu:1 \
   --cpus-per-task=4 \
   --mem=32G \
-  --time=02:00:00 \
+  --time=00:30:00 \
+  --partition=grace \
   --mail-type=BEGIN,END,FAIL \
   --mail-user=${MAIL_USER} \
   --output="${LOG_DIR}/ev_mdm_%j.out" \
   --error="${LOG_DIR}/ev_mdm_%j.err" \
   --wrap="\
-
 module load anaconda/2024.06; \
 source activate mdm; \
 cd ${PROJECT_DIR}; \
@@ -62,4 +62,4 @@ bash eval_mdm.sh \
   --device cuda:0
 "
 
-echo "Submitted mdm_eval to Slurm; logs → ${LOG_DIR}/ev_mdm_<JOBID>.{out,err}"
+echo "Submitted mdm_eval to Slurm; logs → ${LOG_DIR}/ev_mdm_%j.{out,err}"
